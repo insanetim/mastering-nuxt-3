@@ -36,6 +36,40 @@
 const course = useCourse()
 const route = useRoute()
 
+definePageMeta({
+  validate({ params }) {
+    const course = useCourse()
+
+    const chapter = course.chapters.find(
+      chapter => chapter.slug === params.chapterSlug
+    )
+
+    if (!chapter) {
+      throw createError({
+        statusCode: 404,
+        message: 'Chapter not found'
+      })
+    }
+
+    const lesson = chapter.lessons.find(
+      lesson => lesson.slug === params.lessonSlug
+    )
+
+    if (!lesson) {
+      throw createError({
+        statusCode: 404,
+        message: 'Lesson not found'
+      })
+    }
+
+    return true
+  }
+})
+
+if (route.params.lessonSlug === '3-typing-component-events') {
+  console.log(route.params.paramthatdoesntexist.capitalizeIsNotAMethod())
+}
+
 const chapter = computed(() => {
   return course.chapters.find(
     chapter => chapter.slug === route.params.chapterSlug
@@ -49,9 +83,7 @@ const lesson = computed(() => {
 })
 
 const title = `${lesson.value.title} - ${chapter.value.title}`
-useHead({
-  title
-})
+useHead({ title })
 
 const progress = useLocalStorage('progress', [])
 
