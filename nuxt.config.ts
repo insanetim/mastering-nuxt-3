@@ -1,12 +1,15 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   devtools: { enabled: true },
-  css: ['~/assets/css/main.css'],
+  css: ['@/assets/css/main.css'],
   postcss: {
     plugins: {
       tailwindcss: {},
       autoprefixer: {}
     }
   },
-  modules: ['@vueuse/nuxt', '@nuxtjs/supabase']
+  modules: ['@vueuse/nuxt', '@nuxtjs/supabase'],
+  supabase: {
+    redirect: false
+  }
 })
