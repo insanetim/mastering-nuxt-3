@@ -16,14 +16,13 @@
   </label>
 </template>
 
-<script setup>
-defineProps({
-  modelValue: {
-    type: Boolean,
-    default: false
-  }
-})
-defineEmits(['update:modelValue'])
+<script setup lang="ts">
+defineProps<{
+  modelValue: boolean
+}>()
+defineEmits<{
+  (e: 'update:modelValue'): void
+}>()
 </script>
 
 <style scoped>

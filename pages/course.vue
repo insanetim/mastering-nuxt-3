@@ -60,11 +60,11 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
 const course = await useCourse()
 const firstLesson = await useFirstLesson()
 
-const resetError = async error => {
+const resetError = async (error: Ref) => {
   await navigateTo(firstLesson.path)
   error.value = null
 }

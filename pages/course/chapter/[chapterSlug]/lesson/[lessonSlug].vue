@@ -32,10 +32,12 @@
   </div>
 </template>
 
-<script setup>
+<script setup lang="ts">
+import { OutlineChapter } from '~/types/course'
+
 const course = await useCourse()
 const route = useRoute()
-const { chapterSlug, lessonSlug } = route.params
+const { chapterSlug, lessonSlug } = route.params as Record<string, string>
 const lesson = await useLesson(chapterSlug, lessonSlug)
 
 definePageMeta({
@@ -74,19 +76,20 @@ definePageMeta({
 })
 
 if (route.params.lessonSlug === '3-typing-component-events') {
+  // @ts-ignore
   console.log(route.params.paramthatdoesntexist.capitalizeIsNotAMethod())
 }
 
 const chapter = computed(() => {
   return course.value.chapters.find(
     chapter => chapter.slug === route.params.chapterSlug
-  )
+  ) as OutlineChapter
 })
 
-const title = `${lesson.value.title} - ${chapter.value.title}`
+const title = `${lesson.value.title} - ${chapter.value?.title}`
 useHead({ title })
 
-const progress = useLocalStorage('progress', [])
+const progress = useLocalStorage<boolean[][]>('progress', [])
 
 const isLessonComplete = computed(() => {
   if (!progress.value[chapter.value.number - 1]) {
