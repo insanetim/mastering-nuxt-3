@@ -1,4 +1,4 @@
-import { LessonWithPath } from '~/types/course'
+import type { LessonWithPath } from '~/types/course'
 
 export default async () => {
   const course = await useCourse()

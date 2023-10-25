@@ -25,15 +25,17 @@
       :video-id="lesson.videoId"
     />
     <p>{{ lesson.text }}</p>
-    <LessonCompleteButton
-      :model-value="isLessonComplete"
-      @update:model-value="toggleComplete"
-    />
+    <ClientOnly>
+      <LessonCompleteButton
+        :model-value="isLessonComplete"
+        @update:model-value="toggleComplete"
+      />
+    </ClientOnly>
   </div>
 </template>
 
 <script setup lang="ts">
-import { OutlineChapter } from '~/types/course'
+import type { OutlineChapter } from '~/types/course'
 
 const course = await useCourse()
 const route = useRoute()
