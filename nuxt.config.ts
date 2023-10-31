@@ -8,7 +8,7 @@ export default defineNuxtConfig({
       autoprefixer: {}
     }
   },
-  modules: ['@vueuse/nuxt', '@nuxtjs/supabase'],
+  modules: ['@vueuse/nuxt', '@nuxtjs/supabase', '@pinia/nuxt'],
   supabase: {
     redirect: false
   }
