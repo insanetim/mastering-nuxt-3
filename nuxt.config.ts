@@ -1,6 +1,8 @@
+import vsharp from 'vite-plugin-vsharp'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  devtools: { enabled: true },
+  devtools: { enabled: false },
   css: ['~/assets/css/main.css'],
   postcss: {
     plugins: {
@@ -15,6 +17,15 @@ export default defineNuxtConfig({
   nitro: {
     prerender: {
       routes: ['/landing']
+    }
+  },
+  vite: {
+    plugins: [vsharp()]
+  },
+  runtimeConfig: {
+    stripeSecret: '',
+    public: {
+      stripeKey: ''
     }
   }
 })

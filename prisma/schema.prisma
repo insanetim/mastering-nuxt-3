@@ -8,11 +8,12 @@ generator client {
 }
 
 model Course {
-  id        Int       @id @default(autoincrement())
-  title     String
-  chapters  Chapter[]
-  createdAt DateTime  @default(now())
-  updatetAt DateTime  @updatedAt
+  id             Int              @id @default(autoincrement())
+  title          String
+  chapters       Chapter[]
+  createdAt      DateTime         @default(now())
+  updatetAt      DateTime         @updatedAt
+  CoursePurchase CoursePurchase[]
 }
 
 model Chapter {
@@ -46,11 +47,22 @@ model Lesson {
 model LessonProgress {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
-  updatedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
   completed Boolean  @default(false)
   Lesson    Lesson   @relation(fields: [lessonId], references: [id])
   lessonId  Int
   userEmail String
 
   @@unique([lessonId, userEmail])
+}
+
+model CoursePurchase {
+  id        Int      @id @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  Course    Course   @relation(fields: [courseId], references: [id])
+  courseId  Int
+  userEmail String
+  verified  Boolean  @default(false)
+  paymentId String   @unique
 }
