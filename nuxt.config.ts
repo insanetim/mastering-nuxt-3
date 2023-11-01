@@ -11,5 +11,10 @@ export default defineNuxtConfig({
   modules: ['@vueuse/nuxt', '@nuxtjs/supabase', '@pinia/nuxt'],
   supabase: {
     redirect: false
+  },
+  nitro: {
+    prerender: {
+      routes: ['/landing']
+    }
   }
 })
