@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client'
+import { serverSupabaseUser } from '#supabase/server'
 import { ChapterProgress, CourseProgress } from '~/types/course'
 import { ChapterOutline, LessonOutline } from '../course/meta.get'
 
@@ -7,9 +8,8 @@ const prisma = new PrismaClient()
 export default defineEventHandler(async event => {
   protectRoute(event)
 
-  const {
-    user: { email: userEmail }
-  } = event.context
+  const user = await serverSupabaseUser(event)
+  const userEmail = user?.email
 
   const userProgress = await prisma.lessonProgress.findMany({
     where: {

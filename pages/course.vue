@@ -21,12 +21,14 @@
         >
           <h4 class="flex justify-between items-center">
             {{ chapter.title }}
-            <span
-              v-if="percentageCompleted && user"
-              class="text-emerald-500 text-sm"
-            >
-              {{ percentageCompleted.chapters[index] }}%
-            </span>
+            <ClientOnly>
+              <span
+                v-if="percentageCompleted && user"
+                class="text-emerald-500 text-sm"
+              >
+                {{ percentageCompleted.chapters[index] }}%
+              </span>
+            </ClientOnly>
           </h4>
           <NuxtLink
             v-for="(lesson, index) in chapter.lessons"
@@ -42,13 +44,15 @@
             <span>{{ lesson.title }}</span>
           </NuxtLink>
         </div>
-        <div
-          v-if="percentageCompleted"
-          class="mt-8 text-sm font-medium text-gray-500 flex justify-between items-center"
-        >
-          Course competion:
-          <span>{{ percentageCompleted.course }}%</span>
-        </div>
+        <ClientOnly>
+          <div
+            v-if="percentageCompleted && user"
+            class="mt-8 text-sm font-medium text-gray-500 flex justify-between items-center"
+          >
+            Course competion:
+            <span>{{ percentageCompleted.course }}%</span>
+          </div>
+        </ClientOnly>
       </div>
 
       <div class="prose p-12 bg-white rounded-md w-[65ch] min-w-[656px]">
