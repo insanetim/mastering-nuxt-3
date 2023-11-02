@@ -11,12 +11,16 @@
 </template>
 
 <script setup lang="ts">
+const route = useRoute()
 const course = await useCourse()
 const { auth } = useSupabaseClient()
 
 const login = async () => {
   const { error } = await auth.signInWithOAuth({
-    provider: 'github'
+    provider: 'github',
+    options: {
+      redirectTo: route.query.redirectTo as string
+    }
   })
 
   if (error) {

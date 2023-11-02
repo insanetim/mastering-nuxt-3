@@ -1,7 +1,7 @@
 import { PrismaClient } from '@prisma/client'
 import { serverSupabaseUser } from '#supabase/server'
-import { ChapterProgress, CourseProgress } from '~/types/course'
-import { ChapterOutline, LessonOutline } from '../course/meta.get'
+import type { ChapterProgress, CourseProgress } from '~/types/course'
+import type { ChapterOutline, LessonOutline } from '../course/meta.get'
 
 const prisma = new PrismaClient()
 
